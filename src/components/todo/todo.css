@@ -1,0 +1,21 @@
+.todo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.deadline {
+    flex: 100%;
+}
+
+.title {
+    flex: 50%;
+}
+
+.actions {
+    flex: 50%;
+}
+
+.description {
+    flex: 100%;
+}
