@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "react-scripts test --watchAll --coverage",
+    "test": "jest tests.test.js",
     "start": "webpack serve"
   },
   "repository": {
