@@ -6,7 +6,7 @@ import "./index.css";
 const App = () => {
   return (
     <main>
-      <h1>Hello, React with Webpack!</h1>
+      <h1>Todo List React</h1>
       <TodoList/>
     </main>
   )
