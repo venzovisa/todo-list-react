@@ -17,13 +17,15 @@ export const TodoForm = ({ open, onClose, onChange, todo }) => {
         } else {
             onChange({ title, description, deadline });
         }
-        setTitle('');
-        setDescription('');
-        setDeadline('');
+        resetForm();
     }
 
     const handleClose = () => {
         onClose();
+        resetForm();
+    }
+
+    const resetForm = () => {
         setTitle('');
         setDescription('');
         setDeadline('');
@@ -31,7 +33,7 @@ export const TodoForm = ({ open, onClose, onChange, todo }) => {
 
     return (
         <>
-            <Dialog open={open} onClose={handleClose}>
+            <Dialog role="form" open={open} onClose={handleClose}>
                 <DialogTitle>Add todo</DialogTitle>
                 <DialogContent className="form-content">
                     <TextField margin="normal" size="small" required id="title" label="Title" variant="outlined" value={title} onChange={e => setTitle(e.target.value)} />
