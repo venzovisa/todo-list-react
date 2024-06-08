@@ -5,8 +5,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import "./todo-form.css";
+import { TodoFormType } from '../../models/todos';
 
-export const TodoForm = ({ open, onClose, onChange, todo }) => {
+export const TodoForm = ({ open, onClose, onChange, todo }: TodoFormType) => {
     const [title, setTitle] = useState(todo?.title || '');
     const [description, setDescription] = useState(todo?.description || '');
     const [deadline, setDeadline] = useState(todo?.deadline || '');

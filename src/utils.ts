@@ -1,4 +1,6 @@
-export const getTodos = () => {
+import { TodoType } from "./models/todos";
+
+export const getTodos = (): TodoType[] => {
   const todos = window.localStorage.getItem("todos");
 
   if (todos) {
@@ -8,5 +10,5 @@ export const getTodos = () => {
   return [];
 };
 
-export const setTodosInLocalStorage = (todos) =>
+export const setTodosInLocalStorage = (todos: TodoType[]): void =>
   window.localStorage.setItem("todos", JSON.stringify(todos));

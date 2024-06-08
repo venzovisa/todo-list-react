@@ -33,7 +33,7 @@ export const Todo = ({ todo: { id, title, description, deadline, completed, disa
                 <Switch data-testid="disabled" disabled={disabled || isExpired()} checked={!disabled} onChange={() => onChangeTodo({ id, disabled: true })} />
                 <Button disabled={disabled || isExpired()} variant="contained" startIcon={<DeleteIcon />} onClick={() => onDeleteTodo(id)}>Delete</Button>
                 <Button data-testid={'edit-' + id} disabled={disabled || isExpired()} style={{ marginLeft: "4px" }} variant="contained" startIcon={<EditIcon />} onClick={handleOpen}>Edit</Button>
-                <TodoForm open={open} onChange={onChangeTodo} onClose={handleClose} todo={{ id, title, description, deadline }} />
+                <TodoForm open={open} onChange={onChangeTodo} onClose={handleClose} todo={{ id, title, description, deadline, completed, disabled }} />
             </div>
             <div className="description">{description}</div>
         </div>

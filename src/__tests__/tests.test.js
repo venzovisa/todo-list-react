@@ -1,6 +1,10 @@
 import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { TodoList } from "../components/todo-list/todo-list";
+import { store } from '../state/store';
+import { Provider } from "react-redux";
+import { replace } from '../state/todos/todosSlice';
+import { getTodos } from "../utils";
 
 /**
  * @jest-environment jsdom
@@ -10,8 +14,18 @@ beforeEach(() => {
   window.localStorage.clear();
 });
 
+test("should render empty list message", () => {
+  render(<Provider store={store}><TodoList /></Provider>);
+
+  store.dispatch(replace([]));
+
+  const element = screen.getByText(/No items in the list/i);
+
+  expect(element).toBeInTheDocument();
+});
+
 test("should render add todo button", () => {
-  render(<TodoList />);
+  render(<Provider store={store}><TodoList /></Provider>);
 
   const element = screen.getByText(/Add/i);
 
@@ -19,7 +33,7 @@ test("should render add todo button", () => {
 });
 
 test("should render todo form when click on add button", () => {
-  render(<TodoList />);
+  render(<Provider store={store}><TodoList /></Provider>);
 
   const button = screen.getByText(/Add/i);
 
@@ -50,8 +64,10 @@ test("should render todo form with populated fields when click on edit button", 
           },
         ])
       );
+
+    store.dispatch(replace(getTodos()));
   
-    render(<TodoList />);
+    render(<Provider store={store}><TodoList /></Provider>);
   
     const button = screen.getByTestId(/edit-1/i);
   
@@ -89,17 +105,11 @@ test("should render completed list message", () => {
       },
     ])
   );
-  render(<TodoList />);
+  store.dispatch(replace(getTodos()));
+
+  render(<Provider store={store}><TodoList /></Provider>);
 
   const element = screen.getByText(/List is completed/i);
-
-  expect(element).toBeInTheDocument();
-});
-
-test("should render empty list message", () => {
-  render(<TodoList />);
-
-  const element = screen.getByText(/No items in the list/i);
 
   expect(element).toBeInTheDocument();
 });
@@ -118,7 +128,9 @@ test("should render empty list message when delete button is clicked on last ite
         },
       ])
     );
-    render(<TodoList />);
+    store.dispatch(replace(getTodos()));
+
+    render(<Provider store={store}><TodoList /></Provider>);
 
     const button = screen.getByText(/Delete/i);
 
@@ -150,7 +162,9 @@ test("should render list item with correct data", () => {
       },
     ])
   );
-  render(<TodoList />);
+  store.dispatch(replace(getTodos()));
+
+  render(<Provider store={store}><TodoList /></Provider>);
 
   const title = screen.getByText(/Title/i);
   const description = screen.getByText(/Description/i);
@@ -179,7 +193,9 @@ test("should render list item with disabled actions", () => {
       },
     ])
   );
-  render(<TodoList />);
+  store.dispatch(replace(getTodos()));
+
+  render(<Provider store={store}><TodoList /></Provider>);
 
   const completedCheckbox = screen
     .getByTestId(/completed/i)
